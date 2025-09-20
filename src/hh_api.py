@@ -23,3 +23,5 @@ for company_id in company_ids:
     if response.status_code == 200:
         data = response.json()
         vacancies_data.extend(data["items"])
+
+print(vacancies_data)

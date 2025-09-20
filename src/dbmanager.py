@@ -12,9 +12,9 @@ class DBManager:
         self.cursor.execute(
             """
             SELECT c.name, COUNT(v.id) 
-            FROM companies c 
-            LEFT JOIN vacancies v ON c.id = v.company_id 
-            GROUP BY c.id
+            FROM company c 
+            LEFT JOIN vacancy v ON c.company_id  = v.company_id 
+            GROUP BY c.name
         """
         )
         return self.cursor.fetchall()
@@ -23,8 +23,8 @@ class DBManager:
         self.cursor.execute(
             """
             SELECT c.name, v.title, v.salary_min, v.salary_max, v.url 
-            FROM vacancies v 
-            JOIN companies c ON v.company_id = c.id
+            FROM vacancy v 
+            JOIN company c ON v.company_id = c.id
         """
         )
         return self.cursor.fetchall()
@@ -33,7 +33,7 @@ class DBManager:
         self.cursor.execute(
             """
             SELECT AVG((v.salary_min + v.salary_max)/2) 
-            FROM vacancies v 
+            FROM vacancy v 
             WHERE v.salary_min IS NOT NULL AND v.salary_max IS NOT NULL
         """
         )
@@ -44,8 +44,8 @@ class DBManager:
         self.cursor.execute(
             """
             SELECT c.name, v.title, v.salary_min, v.salary_max 
-            FROM vacancies v 
-            JOIN companies c ON v.company_id = c.id 
+            FROM vacancy v 
+            JOIN company c ON v.company_id = c.id 
             WHERE (v.salary_min + v.salary_max) / 2 > %s
         """,
             (avg_salary,),
@@ -56,8 +56,8 @@ class DBManager:
         self.cursor.execute(
             """
             SELECT c.name, v.title, v.salary_min, v.salary_max 
-            FROM vacancies v 
-            JOIN companies c ON v.company_id = c.id 
+            FROM vacancy v 
+            JOIN company c ON v.company_id = c.company_id 
             WHERE v.title ILIKE %s
         """,
             (f"%{keyword}%",),
