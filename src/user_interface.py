@@ -1,4 +1,7 @@
-def user_interface(db_manager):
+from typing import Any
+
+
+def user_interface(db_manager: Any) -> None:
     while True:
         print("\nДобро пожаловать в систему управления вакансиями!")
         print("Выберите команду:")

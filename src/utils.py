@@ -28,7 +28,8 @@ for company in vacancies_data:
 for vacancy in vacancies_data:
     if vacancy.get("salary") is not None:
         cursor.execute(
-            "INSERT INTO vacancy (title, salary_min, salary_max, currency, company_id, url) VALUES (%s, %s, %s, %s, %s, %s)",
+            "INSERT INTO vacancy (title, salary_min, salary_max, currency, company_id, url)"
+            " VALUES (%s, %s, %s, %s, %s, %s)",
             (
                 vacancy["name"],
                 vacancy.get("salary", {}).get("from"),
