@@ -4,7 +4,7 @@ import psycopg2
 
 
 class DBManager:
-    def __init__(self, dbname: Any, user: Any, password: Any, host: str ="localhost", port: str ="5432") -> None:
+    def __init__(self, dbname: Any, user: Any, password: Any, host: str = "localhost", port: str = "5432") -> None:
         self.conn = psycopg2.connect(
             dbname=dbname, user=user, password=password, host=host, port=port
         )

@@ -1,14 +1,18 @@
+import os
+
 import psycopg2
+from dotenv import load_dotenv
 
 from src.hh_api import vacancies_data
 
-# Настройки подключения к БД
+load_dotenv()
+
 conn = psycopg2.connect(
-    dbname="courseproject3",
-    user="postgres",
-    password="191979",
-    host="localhost",
-    port="5432",
+    dbname=os.getenv("DBNAME"),
+    user=os.getenv("USER"),
+    password=os.getenv("PASSWORD"),
+    host=os.getenv("HOST"),
+    port=os.getenv("PORT"),
 )
 
 cursor = conn.cursor()
